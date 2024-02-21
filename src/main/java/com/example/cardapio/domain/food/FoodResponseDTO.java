@@ -1,4 +1,4 @@
-package com.example.cardapio.food;
+package com.example.cardapio.domain.food;
 
 public record FoodResponseDTO(
         Long id,
