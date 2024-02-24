@@ -1,6 +1,5 @@
 package com.example.cardapio.domain.order.dto;
 
-import com.example.cardapio.domain.food.Food;
 import lombok.Data;
 
 import java.util.List;
@@ -13,6 +12,6 @@ public class OrderResponseDTO {
     private String telefone;
     private String endereco;
     private List<String> items;
-    private FormaPagamento formaPagamento;
+    private Pagamento formaPagamento;
     private Integer total;
 }

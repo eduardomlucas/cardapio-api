@@ -10,8 +10,8 @@ public class OrderRequestDTO {
     private String nome;
     private String telefone;
     private String entrega;
-    private String endereco;
-    private FormaPagamento formaPagamento;
+    private Endereco endereco;
+    private Pagamento pagamento;
     private List<Pedido> pedido;
 
 }

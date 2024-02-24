@@ -29,30 +29,36 @@ public class OrderService {
 
         System.out.println(dto);
         for(Pedido item :  dto.getPedido()){
-            System.out.println("---------------------");
-            System.out.println(item);
             Food food = foodRepository.findById(item.getId()).get();
             itemsPedido.add(food.getTitle());
 
             Integer valorItems = item.getQuantity() * food.getPrice();
 
             valorTotal += valorItems;
+
         }
 
+        // taxa de entrega
+        if(dto.getEntrega().equals("casa")){
+            valorTotal += 10;
+        }
+
+        String endereco = formataEndereco(dto.getEndereco().getLogradouro(),dto.getEndereco().getNumero(), dto.getEndereco().getComplemento());
+
         OrderResponseDTO response = new OrderResponseDTO();
-        response.setEndereco(dto.getEndereco());
+        response.setEndereco(endereco);
         response.setNome(dto.getNome());
         response.setTotal(valorTotal);
         response.setTelefone(dto.getTelefone());
-        response.setFormaPagamento(dto.getFormaPagamento());
+        response.setFormaPagamento(dto.getPagamento());
         response.setItems(itemsPedido);
 
-        // faz o envio de notificação para o usuário (sms/wpp)
-
-        //salva no banco a order
-
-        // seta a orderId com base na sequence do banco
         response.setOrderId(Long.valueOf(1));
+
         return response;
+    }
+
+    private String formataEndereco(String logradouro, String numero, String complemento) {
+        return logradouro + " - " + numero + " | Complemento: "+complemento;
     }
 }
